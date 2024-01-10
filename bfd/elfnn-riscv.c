@@ -4531,7 +4531,7 @@ _bfd_riscv_relax_call (bfd *abfd, asection *sec, asection *sym_sec,
     {
       /* Relax to C.J[AL] rd, addr.  */
       r_type = R_RISCV_RVC_JUMP;
-      auipc = rd == 0 ? MATCH_C_J : MATCH_C_JAL;
+      auipc = (rd != 0 && !ABI_X32_P(abfd)) ? MATCH_C_JAL : MATCH_C_J;
       len = 2;
     }
   else if (VALID_JTYPE_IMM (foff))
